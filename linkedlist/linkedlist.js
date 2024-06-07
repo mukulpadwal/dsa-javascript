@@ -134,12 +134,12 @@ LinkedList.prototype.findWithGivenKey = function (key) {
 
     while(curr){
         if(curr.data === key){
-            return true;
+            return curr;
         }
         curr = curr.next;
     }
 
-    return false;
+    return null;
 }
 
 
@@ -195,3 +195,6 @@ console.log(linkedList.traverse());
 linkedList.deleteWithGivenKey(69);
 console.log(linkedList.traverse());
 
+let desiredNode = linkedList.findWithGivenKey(3);
+linkedList.insertAfter(desiredNode , 9);
+console.log(linkedList.traverse());
