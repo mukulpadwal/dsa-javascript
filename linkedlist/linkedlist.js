@@ -176,3 +176,22 @@ LinkedList.prototype.reverse = function (){
 
     this.head = prev;
 }
+
+
+
+// Usage
+let linkedList = new LinkedList();
+console.log(linkedList.traverse());
+linkedList.insertAtBeginning(1);
+console.log(linkedList.traverse());
+linkedList.insertAtBeginning(2);
+console.log(linkedList.traverse());
+linkedList.insertAtEnd(3);
+linkedList.insertAtEnd(4);
+console.log(linkedList.traverse());
+linkedList.insertAfter(linkedList.head, 69);
+console.log(linkedList.traverse());
+
+linkedList.deleteWithGivenKey(69);
+console.log(linkedList.traverse());
+
