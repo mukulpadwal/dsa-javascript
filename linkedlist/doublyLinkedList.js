@@ -72,62 +72,113 @@ DoublyLinkedList.prototype.insertAfter = function (node, data) {
   }
 };
 
-
 // Delete first element
 DoublyLinkedList.prototype.deleteFirst = function () {
-    // Case 1 : if the list is empty
-    if(this.head === null){
-        console.log("List is empty...");
-        return;
-    }
+  // Case 1 : if the list is empty
+  if (this.head === null) {
+    console.log("List is empty...");
+    return;
+  }
 
-    // Case 2 : Only one element is present in list
-    if(this.head.next === null){
-        this.head = null;
-        this.tail = null;
-        return;
-    }
+  // Case 2 : Only one element is present in list
+  if (this.head.next === null) {
+    this.head = null;
+    this.tail = null;
+    return;
+  }
 
-    // Case 3 : we have a proper list
-    this.head = this.head.next;
-    this.head.prev = null;
-}
-
+  // Case 3 : we have a proper list
+  this.head = this.head.next;
+  this.head.prev = null;
+};
 
 // Delete last element
 DoublyLinkedList.prototype.deleteLast = function () {
-    // Case 1 : if the list is empty
-    if(this.tail === null){
-        return;
-    }
+  // Case 1 : if the list is empty
+  if (this.tail === null) {
+    return;
+  }
 
+  // Case 2 : if there is only one node
+  if (this.tail === this.head) {
+    this.tail = null;
+    this.head = null;
+  }
 
-    // Case 2 : if there is only one node
-    if(this.tail === this.head){
-        this.tail = null;
-        this.head = null;
-    }
-
-    // Case 3 : if there is a proper list
-    this.tail = this.tail.prev;
-    this.tail.next = null;
-}
-
+  // Case 3 : if there is a proper list
+  this.tail = this.tail.prev;
+  this.tail.next = null;
+};
 
 // Reverse a doubly linked list
 DoublyLinkedList.prototype.reverse = function () {
-    let current = this.head;
-    let temp = null;
+  let current = this.head;
+  let temp = null;
 
-    while(current){
-        temp = current.prev;
-        current.prev = current.next;
-        current.next = prev;
-        current = current.prev;
-    }
+  while (current) {
+    temp = current.prev;
+    current.prev = current.next;
+    current.next = prev;
+    current = current.prev;
+  }
 
-    if(temp !== null){
-        this.tail = this.head;
-        this.head = temp.prev;
+  if (temp.prev !== null) {
+    this.tail = this.head;
+    this.head = temp.prev;
+  }
+};
+
+// Print
+DoublyLinkedList.prototype.print = function () {
+  let current = this.head;
+  let answer = [];
+
+  if (current === null) {
+    return answer;
+  }
+
+  while (current) {
+    answer.push(current.data);
+    current = current.next;
+  }
+
+  return answer.join(" = ");
+};
+
+// Search element with key
+DoublyLinkedList.prototype.searchWithKey = function (key){
+  let current = this.head;
+
+  while(current){
+    if(current.data === key){
+      return current;
     }
+    current = current.next;
+  }
+
+  return null;
 }
+
+
+
+// Usage
+let dll = new DoublyLinkedList();
+console.log(dll.print());
+
+dll.insertAtBeginning(1);
+console.log(dll.print());
+dll.insertAtBeginning(2);
+console.log(dll.print());
+dll.insertAtEnd(3);
+dll.insertAtEnd(6);
+dll.insertAtEnd(9);
+console.log(dll.print());
+
+dll.insertAfter(dll.searchWithKey(1), 8);
+console.log(dll.print());
+
+dll.deleteFirst();
+console.log(dll.print());
+
+dll.deleteLast();
+console.log(dll.print());
