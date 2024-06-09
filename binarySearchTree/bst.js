@@ -6,6 +6,7 @@ import {
   breadthFirstTraversalIterative,
   breadthFirstTraversalRecursive,
 } from "./bft.js";
+import { treeSumBFS, treeSumDFS } from "../problems/treesum/treeSum.js";
 
 class BSTNode {
   constructor(key, left = null, right = null) {
@@ -234,14 +235,12 @@ class BinarySearchTree {
 // Usage
 let tree = new BinarySearchTree();
 tree.insert(15);
-tree.insert(10);
-tree.insert(5);
-tree.insert(20);
-tree.insert(17);
-tree.insert(11);
 tree.insert(13);
+tree.insert(17);
 tree.insert(12);
 tree.insert(14);
+tree.insert(16);
+tree.insert(18);
 
 // console.log(tree.inOrderTraversal());
 // console.log(tree.postOrderTraversal());
@@ -255,3 +254,7 @@ console.log(depthFirstTraversalRecursive(tree.root, []));
 
 console.log(breadthFirstTraversalIterative(tree.root));
 console.log(breadthFirstTraversalRecursive(tree.root, [], [tree.root]));
+
+
+console.log(treeSumBFS(tree.root))
+console.log(treeSumDFS(tree.root))
