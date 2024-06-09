@@ -1,0 +1,11 @@
+{
+  "name": "dsa-javascript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {},
+  "keywords": [],
+  "author": "Mukul Padwal",
+  "license": "ISC",
+  "description": "DSA with javascript"
+}
