@@ -22,10 +22,11 @@ function reverseStringRecursive(str) {
     return "";
   }
 
-  // Last character of the string at this point
-  let lastChar = str[str.length - 1];
   // function call
   let reversePart = reverseStringRecursive(str.substring(0, str.length - 1));
+
+  // Last character of the string at this point
+  let lastChar = str[str.length - 1];
 
   // generating and returing a new string in reverse manner
   return lastChar + reversePart;
