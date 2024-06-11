@@ -11,177 +11,201 @@ class LinkedList {
   }
 }
 
-
-// Insert Data at the beginning
+/**
+ * @function insertAtBeginning
+ * @param {BSTNode} data
+ * @returns
+ */
 LinkedList.prototype.insertAtBeginning = function (data) {
-    // Step 1 : Create a new Node
-    let newNode = new Node(data);
+  // Step 1 : Create a new Node
+  let newNode = new Node(data);
 
-    // Step 2 : point the head to this node
-    if(this.head === null){
-        this.head = newNode;
-        return;
-    }
+  // Step 2 : point the head to this node
+  if (this.head === null) {
+    this.head = newNode;
+    return;
+  }
 
-    let newHead = newNode;
-    newHead.next = this.head;
-    this.head = newHead;
-}
+  let newHead = newNode;
+  newHead.next = this.head;
+  this.head = newHead;
+};
 
-
-// Insert data at the end
+/**
+ * @function insertAtEnd
+ * @param {BSTNode} data
+ * @returns
+ */
 LinkedList.prototype.insertAtEnd = function (data) {
-    // Step 1 : Create a new Node
-    let newNode = new Node(data);
+  // Step 1 : Create a new Node
+  let newNode = new Node(data);
 
-    // Step 2 : check if the list is empty or not
-    if(!this.head){
-        this.head = newNode;
-        return;
-    }
+  // Step 2 : check if the list is empty or not
+  if (!this.head) {
+    this.head = newNode;
+    return;
+  }
 
-    // Step 3 : point tail to head
-    let tail = this.head;
+  // Step 3 : point tail to head
+  let tail = this.head;
 
-    while(tail.next != null){
-        tail = tail.next;
-    }
+  while (tail.next != null) {
+    tail = tail.next;
+  }
 
-    // Step 4 : point tail to new node
-    tail.next = newNode;
-}
+  // Step 4 : point tail to new node
+  tail.next = newNode;
+};
 
+/**
+ * @function insertAfter
+ * @param {BSTNode} prevNode
+ * @param {*} data
+ * @returns
+ */
+LinkedList.prototype.insertAfter = function (prevNode, data) {
+  if (prevNode == null) {
+    console.log(`prevNode cannot be null.`);
+    return;
+  }
 
-// Insert after a given node 
-LinkedList.prototype.insertAfter = function (prevNode, data){
-    if(prevNode == null){
-        console.log(`prevNode cannot be null.`);
-        return;
-    }
+  let newNode = new Node(data, prevNode.next);
+  prevNode.next = newNode;
+};
 
-    let newNode = new Node(data, prevNode.next);
-    prevNode.next = newNode;
-}
-
-
-// Delete first node
+/**
+ * @function deleteFirst
+ * @returns
+ */
 LinkedList.prototype.deleteFirst = function () {
-    // Step 1 : check if the list is empty
-    if(!this.head){
-        return;
-    }
+  // Step 1 : check if the list is empty
+  if (!this.head) {
+    return;
+  }
 
-    // Step 2 : move head to next position
+  // Step 2 : move head to next position
+  this.head = this.head.next;
+};
+
+/**
+ * @function deleteLast
+ * @returns
+ */
+LinkedList.prototype.deleteLast = function () {
+  // Step 1 : check if the list is empty
+  if (!this.head) {
+    return;
+  }
+
+  // Step 2 : if list has only one element
+  if (!this.head.next) {
+    this.head = null;
+    return;
+  }
+
+  // Step 3 : find the second last element
+  let secondLast = this.head;
+
+  while (secondLast.next.next) {
+    secondLast = secondLast.next;
+  }
+
+  // Step 4 : point the secondLast node to null
+  secondLast.next = null;
+};
+
+/**
+ * @function deleteWithGivenKey
+ * @param {*} key
+ * @returns
+ */
+LinkedList.prototype.deleteWithGivenKey = function (key) {
+  // Step 1 : if the list is empty
+  if (!this.head) {
+    console.log(`List already empty...`);
+    return;
+  }
+
+  // Step 2 : if the key is present at first element
+  if (this.head.data === key) {
     this.head = this.head.next;
-}
+    return;
+  }
 
+  let curr = this.head;
 
-// Delete last node
-LinkedList.prototype.deleteLast = function (){
-    // Step 1 : check if the list is empty
-    if(!this.head){
-        return;
+  while (curr.next !== null) {
+    if (curr.next.data === key) {
+      curr.next = curr.next.next;
+      return;
     }
+    curr = curr.next;
+  }
 
-    // Step 2 : if list has only one element
-    if(!this.head.next){
-        this.head = null;
-        return;
-    }
+  console.log(`No node with the given key is present in the list.`);
+};
 
-    // Step 3 : find the second last element
-    let secondLast = this.head;
-
-    while(secondLast.next.next){
-        secondLast = secondLast.next;
-    }
-
-    // Step 4 : point the secondLast node to null
-    secondLast.next = null;
-}
-
-
-// Delete a node with given key
-LinkedList.prototype.deleteWithGivenKey = function (key){
-    // Step 1 : if the list is empty
-    if(!this.head){
-        console.log(`List already empty...`);
-        return;
-    }
-
-    // Step 2 : if the key is present at first element
-    if(this.head.data === key){
-        this.head = this.head.next;
-        return;
-    }
-
-    let curr = this.head;
-
-    while(curr.next !== null){
-        if(curr.next.data === key){
-            curr.next = curr.next.next;
-            return;
-        }
-        curr = curr.next;
-    }
-
-    console.log(`No node with the given key is present in the list.`);
-}
-
-// Search an element with given key
+/**
+ * @function findWithGivenKey
+ * @param {*} key
+ * @returns
+ */
 LinkedList.prototype.findWithGivenKey = function (key) {
-    let curr = this.head;
+  let curr = this.head;
 
-    while(curr){
-        if(curr.data === key){
-            return curr;
-        }
-        curr = curr.next;
+  while (curr) {
+    if (curr.data === key) {
+      return curr;
     }
+    curr = curr.next;
+  }
 
-    return null;
-}
+  return null;
+};
 
-
-// Traverse through linked list
+/**
+ * @function traverse
+ * @returns
+ */
 LinkedList.prototype.traverse = function () {
-    let output = [];
+  let output = [];
 
-    if(this.head === null){
-        return output;
-    }
+  if (this.head === null) {
+    return output;
+  }
 
-    // let curr = this.head;
-    // while(curr){
-    //     output.push(curr.data);
-    //     curr = curr.next;
-    // }
+  // let curr = this.head;
+  // while(curr){
+  //     output.push(curr.data);
+  //     curr = curr.next;
+  // }
 
-    for(let curr = this.head; curr !== null; curr=curr.next){
-        output.push(curr.data);
-    }
+  for (let curr = this.head; curr !== null; curr = curr.next) {
+    output.push(curr.data);
+  }
 
-    return output.join(" -> ");
-}
+  return output.join(" -> ");
+};
 
-// Reverse a linked list
-LinkedList.prototype.reverse = function (){
-    // helper nodes
-    let curr = this.head;
-    let prev = null;
-    let next = null;
+/**
+ * @function reverse
+ * @returns
+ */
+LinkedList.prototype.reverse = function () {
+  // helper nodes
+  let curr = this.head;
+  let prev = null;
+  let next = null;
 
-    while(curr){
-        next = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = next;
-    }
+  while (curr) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
 
-    this.head = prev;
-}
-
-
+  this.head = prev;
+};
 
 // Usage
 let linkedList = new LinkedList();
@@ -200,5 +224,5 @@ linkedList.deleteWithGivenKey(69);
 console.log(linkedList.traverse());
 
 let desiredNode = linkedList.findWithGivenKey(3);
-linkedList.insertAfter(desiredNode , 9);
+linkedList.insertAfter(desiredNode, 9);
 console.log(linkedList.traverse());
