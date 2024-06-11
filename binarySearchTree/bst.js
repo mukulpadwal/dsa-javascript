@@ -230,6 +230,30 @@ class BinarySearchTree {
     // Let's include the node value in output
     output.push(node.key);
   }
+
+  // depthFirstTraversalIterative1(node){
+  //   if(node == null){
+  //     return [];
+  //   }
+
+  //   let output = [];
+  //   let stack = [node];
+
+  //   while(stack.length !== 0){
+  //     let currentNode = stack.pop();
+  //     output.push(currentNode.key);
+
+  //     if(currentNode.right !== null){
+  //       stack.push(currentNode.right);
+  //     }
+
+  //     if(currentNode.left !== null){
+  //       stack.push(currentNode.left);
+  //     }
+  //   }
+
+  //   return output;
+  // }
 }
 
 // Usage
@@ -250,11 +274,10 @@ tree.insert(18);
 // console.log(tree.inOrderTraversal());
 
 console.log(depthFirstTraversalIterative(tree.root));
-console.log(depthFirstTraversalRecursive(tree.root, []));
+// console.log(depthFirstTraversalRecursive(tree.root, []));
 
-console.log(breadthFirstTraversalIterative(tree.root));
-console.log(breadthFirstTraversalRecursive(tree.root, [], [tree.root]));
+// console.log(breadthFirstTraversalIterative(tree.root));
+// console.log(breadthFirstTraversalRecursive(tree.root, [], [tree.root]));
 
-
-console.log(treeSumBFS(tree.root))
-console.log(treeSumDFS(tree.root))
+// console.log(treeSumBFS(tree.root))
+// console.log(treeSumDFS(tree.root))
