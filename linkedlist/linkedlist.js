@@ -151,10 +151,14 @@ LinkedList.prototype.traverse = function () {
         return output;
     }
 
-    let curr = this.head;
-    while(curr){
+    // let curr = this.head;
+    // while(curr){
+    //     output.push(curr.data);
+    //     curr = curr.next;
+    // }
+
+    for(let curr = this.head; curr !== null; curr=curr.next){
         output.push(curr.data);
-        curr = curr.next;
     }
 
     return output.join(" -> ");
