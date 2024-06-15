@@ -48,10 +48,10 @@ function createGraph(edges) {
 function shortestPath(graph, start, dest) {
   // Edge case: if start and dest are the same
   if (start === dest) {
-    return 1;
+    return 0;
   }
 
-  let queue = [[start, 1]]; // Initialize queue with start node and distance 0
+  let queue = [[start, 0]]; // Initialize queue with start node and distance 0
   const visited = new Set([start]); // Set to keep track of visited nodes
 
   while (queue.length !== 0) {
