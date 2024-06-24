@@ -50,7 +50,7 @@ var maxOperations = function (nums, k) {
             operations++;
             map.set(compliment, map.get(compliment) - 1);
         } else {
-            map.set(compliment, (map.get(compliment) || 0) + 1);
+            map.set(num, (map.get(compliment) || 0) + 1);
         }
     }
 
