@@ -4,6 +4,9 @@
  * This class provides methods to add, remove, check size, and other queue operations.
  */
 class Queue {
+  /**
+   * Initializes an empty queue.
+   */
   constructor() {
     this.queue = [];
   }
