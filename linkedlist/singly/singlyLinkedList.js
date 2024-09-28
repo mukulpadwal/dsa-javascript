@@ -1,4 +1,9 @@
 class Node {
+  /**
+   * Initializes a new Node with the given data and next node.
+   * @param {*} data - The data to be stored in the node.
+   * @param {Node} [next=null] - The next node in the linked list.
+   */
   constructor(data, next = null) {
     this.data = data;
     this.next = next;
@@ -6,35 +11,41 @@ class Node {
 }
 
 class LinkedList {
+  /**
+   * Initializes a new LinkedList with no nodes.
+   * @constructor
+   */
   constructor() {
     this.head = null;
   }
 }
 
 /**
+ * Inserts a new node at the beginning of the linked list
  * @function insertAtBeginning
- * @param {BSTNode} data
- * @returns
+ * @param {*} data - The data to be stored in the new node
+ * @returns nothing
  */
 LinkedList.prototype.insertAtBeginning = function (data) {
   // Step 1 : Create a new Node
   let newNode = new Node(data);
 
-  // Step 2 : point the head to this node
-  if (this.head === null) {
+  // Step 2 : check if the list is empty or not
+  if (!this.head) {
     this.head = newNode;
     return;
   }
-
-  let newHead = newNode;
-  newHead.next = this.head;
-  this.head = newHead;
+  
+  // Step 3 : point head to new node
+  newNode.next = this.head;
+  this.head = newNode;
 };
 
 /**
+ * Inserts a new node at the end of the linked list
  * @function insertAtEnd
- * @param {BSTNode} data
- * @returns
+ * @param {*} data - The data to be stored in the new node
+ * @returns nothing
  */
 LinkedList.prototype.insertAtEnd = function (data) {
   // Step 1 : Create a new Node
@@ -46,23 +57,23 @@ LinkedList.prototype.insertAtEnd = function (data) {
     return;
   }
 
-  // Step 3 : point tail to head
+  // Step 3 : point tail to new node
   let tail = this.head;
-
-  while (tail.next != null) {
+  while (tail.next) {
     tail = tail.next;
   }
-
-  // Step 4 : point tail to new node
   tail.next = newNode;
 };
 
-/**
- * @function insertAfter
- * @param {BSTNode} prevNode
- * @param {*} data
- * @returns
- */
+
+  /**
+   * Inserts a new node after a given node in the linked list
+   * @function insertAfter
+   * @param {Node} prevNode - The node after which the new node is to be inserted.
+   * @param {*} data - The data to be stored in the new node.
+   * @returns nothing
+   * @throws {Error} - If the prevNode is null.
+   */
 LinkedList.prototype.insertAfter = function (prevNode, data) {
   if (prevNode == null) {
     console.log(`prevNode cannot be null.`);
@@ -73,10 +84,12 @@ LinkedList.prototype.insertAfter = function (prevNode, data) {
   prevNode.next = newNode;
 };
 
-/**
- * @function deleteFirst
- * @returns
- */
+
+  /**
+   * Deletes the first node of the linked list
+   * @function deleteFirst
+   * @returns nothing
+   */
 LinkedList.prototype.deleteFirst = function () {
   // Step 1 : check if the list is empty
   if (!this.head) {
@@ -87,10 +100,12 @@ LinkedList.prototype.deleteFirst = function () {
   this.head = this.head.next;
 };
 
-/**
- * @function deleteLast
- * @returns
- */
+
+  /**
+   * Deletes the last node of the linked list
+   * @function deleteLast
+   * @returns nothing
+   */
 LinkedList.prototype.deleteLast = function () {
   // Step 1 : check if the list is empty
   if (!this.head) {
@@ -114,11 +129,13 @@ LinkedList.prototype.deleteLast = function () {
   secondLast.next = null;
 };
 
-/**
- * @function deleteWithGivenKey
- * @param {*} key
- * @returns
- */
+
+  /**
+   * Deletes the node containing a given key from the linked list.
+   * @function deleteWithGivenKey
+   * @param {*} key - The key to be searched in the list
+   * @returns nothing
+   */
 LinkedList.prototype.deleteWithGivenKey = function (key) {
   // Step 1 : if the list is empty
   if (!this.head) {
@@ -145,10 +162,12 @@ LinkedList.prototype.deleteWithGivenKey = function (key) {
   console.log(`No node with the given key is present in the list.`);
 };
 
+
 /**
+ * Finds a node containing a given key in the linked list
  * @function findWithGivenKey
- * @param {*} key
- * @returns
+ * @param {*} key - The key to be searched in the list
+ * @returns {Node|null} - The node containing the key if found, null otherwise
  */
 LinkedList.prototype.findWithGivenKey = function (key) {
   let curr = this.head;
@@ -163,9 +182,12 @@ LinkedList.prototype.findWithGivenKey = function (key) {
   return null;
 };
 
+
 /**
+ * Traverses the linked list and returns a string representation
+ * of the list, with '->' separating each element.
  * @function traverse
- * @returns
+ * @returns {string} - A string representation of the linked list
  */
 LinkedList.prototype.traverse = function () {
   let output = [];
@@ -187,9 +209,11 @@ LinkedList.prototype.traverse = function () {
   return output.join(" -> ");
 };
 
+
 /**
+ * Reverses the linked list
  * @function reverse
- * @returns
+ * @returns nothing
  */
 LinkedList.prototype.reverse = function () {
   // helper nodes
@@ -209,20 +233,31 @@ LinkedList.prototype.reverse = function () {
 
 // Usage
 let linkedList = new LinkedList();
+
+// Case 1 : Linked list is empty
 console.log(linkedList.traverse());
+
+// Case 2 : Inserting at the beginning
 linkedList.insertAtBeginning(1);
 console.log(linkedList.traverse());
+
 linkedList.insertAtBeginning(2);
 console.log(linkedList.traverse());
+
+// Case 3 : Inserting at the end
 linkedList.insertAtEnd(3);
 linkedList.insertAtEnd(4);
 console.log(linkedList.traverse());
+
+// Case 4 : Inserting after a given node
 linkedList.insertAfter(linkedList.head, 69);
 console.log(linkedList.traverse());
 
+// Case 5 : Deleting a node with a given key
 linkedList.deleteWithGivenKey(69);
 console.log(linkedList.traverse());
 
+// Case 6 : Finding a node with a given key
 let desiredNode = linkedList.findWithGivenKey(3);
 linkedList.insertAfter(desiredNode, 9);
 console.log(linkedList.traverse());
