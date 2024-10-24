@@ -33,6 +33,8 @@ class Trie {
 
       currNode = currNode.children[char];
     }
+
+    currNode.isEndOfWord = true;
   }
 
   /**
@@ -77,3 +79,23 @@ class Trie {
     return true;
   }
 }
+
+/**
+ * Examples
+ */
+const trie = new Trie();
+trie.insert("apple");
+trie.insert("banana");
+trie.insert("orange");
+
+console.log(trie.search("apple")); // true
+console.log(trie.search("banana")); // true
+console.log(trie.search("orange")); // true
+
+console.log(trie.search("grape")); // false
+
+console.log(trie.isPrefix("ap")); // true
+console.log(trie.isPrefix("app")); // true
+console.log(trie.isPrefix("ban")); // true
+
+console.log(trie.isPrefix("grape")); // false
