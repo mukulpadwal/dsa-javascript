@@ -30,7 +30,7 @@ function depthFirstTraversalIterative(graph, start) {
   let visited = new Set();
 
   // Continue the traversal until there are no more nodes in the stack
-  while (stack.length !== 0) {
+  while (stack.length > 0) {
     // Pop the current node from the stack
     let currNode = stack.pop();
 
