@@ -79,7 +79,27 @@ class Trie {
     return true;
   }
 
+  /**
+   * Removes a word from the Trie, if present. This function uses a recursive
+   * helper function to traverse the Trie and remove nodes that are no longer 
+   * part of any word.
+   *
+   * @param {string} word - The word to be removed from the Trie.
+   *
+   * The function marks the end of the word as false if the word is found. 
+   * It also checks if nodes can be deleted by confirming they have no children 
+   * and are not the end of another word. The process starts from the root node 
+   * and continues until the entire word is processed or determined to not exist 
+   * in the Trie.
+   */
   removeWord(word) {
+    /**
+     * A recursive helper function to delete a word from the Trie.
+     * @param {TrieNode} node The current node in the Trie.
+     * @param {string} word The word to be deleted from the Trie.
+     * @param {number} index The current index of the word being processed.
+     * @returns {boolean} True if the node should be deleted, false otherwise.
+     */
     const deleteRecursively = (node, word, index) => {
       // Base case: If we reach the end of the word
       if (index === word.length) {
